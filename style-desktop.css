@@ -1,0 +1,163 @@
+@font-face {
+    font-family: 'Roboto-Black';
+    src: url(fonts/Roboto-Black.ttf);
+}
+
+* {
+    font-family: 'Roboto';
+    /* outline: 2px solid red; */
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #F3E9DC;
+    position: relative; /* To position the dropdown */
+}
+
+.header img {
+    height: 100px;
+    width: auto;
+}
+
+nav {
+    display: none; /* Hide the menu by default */
+    flex-direction: column;
+    background-color: #F3E9DC;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 200px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+nav a {
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    font-weight: 900;
+    font-family: 'Roboto-Black';
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+nav a:last-child {
+    border-bottom: none;
+}
+
+.nav-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Dropdown icon style */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Show the dropdown menu on button click */
+.header.active nav {
+    display: flex;
+}
+
+
+#hero {
+    display: flex;
+    flex-direction: row;
+    background: #613d2a;
+}
+
+#hero div{
+    flex:1;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+    /* padding-left: 150px;
+    padding-right: 250px; */
+    color: #f6f3f1;
+}
+
+.title h1 {
+    font-size: 50px;
+    flex:0 0 auto;
+    width: 500px;
+    margin:0;
+}
+
+.title p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.title button {
+    background-color: #3882F6;
+    color: #F3E9DC;
+    font-weight: bold;
+    display: flex;
+    border: none;
+    font-size: 20px;
+    padding: 10px;
+    width: 200px;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+#hero .images {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}
+
+#about {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #F3E9DC;
+}
+
+#about p {
+    width: 600px;
+    font-size: 20px;
+}
+
+#about img {
+    border-radius: 50%;
+}
+
+#testimonial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#testimonial h1{
+    font-size: 40px;
+}
