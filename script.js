@@ -32,3 +32,24 @@ document.querySelector('.prev').addEventListener('click', function() {
     // Show new testimonial
     testimonials[currentTestimonial].classList.add('active');
 });
+
+window.addEventListener('scroll', function() {
+    const steps = document.querySelectorAll('.step');
+    const progressBar = document.getElementById('progress-bar');
+    let scrollY = window.pageYOffset;
+    
+    steps.forEach((step, index) => {
+        const stepTop = step.offsetTop - 400; // Adjust trigger point
+        const stepHeight = step.offsetHeight;
+        
+        if (scrollY >= stepTop && scrollY < stepTop + stepHeight) {
+            // Mark step as active
+            step.classList.add('active');
+            
+            // Update progress bar
+            let progress = ((index + 1) / steps.length) * 100;
+            progressBar.style.width = progress + '%';
+        }
+    });
+});
+

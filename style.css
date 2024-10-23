@@ -104,6 +104,67 @@ h1 {
     font-size: 2rem;
 }
 
+#about p {
+    text-align: center;
+}
+
+.sticky-container {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    background-color: #F3E9DC;
+    padding: 20px;
+    z-index: 10;
+    text-align: center;
+}
+
+#staycation h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    position: relative;
+    height: 8px;
+    width: 100%;
+    background-color: #d3d3d3;
+}
+
+.progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: #613d2a;
+    transition: width 0.3s ease-out;
+}
+
+/* Steps Container */
+.steps {
+    margin-top: 30px;
+    padding: 0 20px;
+}
+
+/* Individual Step */
+.step {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    margin-bottom: 40px;
+}
+
+.step.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.step h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
 /* Testimonial Carousel */
 #testimonial {
     background-color: #F3E9DC;
