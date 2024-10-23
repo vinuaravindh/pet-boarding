@@ -39,7 +39,7 @@ window.addEventListener('scroll', function() {
     let scrollY = window.pageYOffset;
     
     steps.forEach((step, index) => {
-        const stepTop = step.offsetTop - 400; // Adjust trigger point
+        const stepTop = step.offsetTop - 600; // Adjust trigger point
         const stepHeight = step.offsetHeight;
         
         if (scrollY >= stepTop && scrollY < stepTop + stepHeight) {

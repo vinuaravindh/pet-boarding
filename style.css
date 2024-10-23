@@ -230,6 +230,26 @@ h1 {
     background-color: #d4bda9;
 }
 
+.floating-whatsapp-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #c9ae8a;
+    padding: 7px 8px 5px;
+    border-radius: 50%;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.floating-whatsapp-btn img {
+    width: 40px;
+    height: 40px;
+}
+
+.floating-whatsapp-btn:hover {
+    background-color: #1ebd5b;
+}
+
 
 #contact {
     background-color: #613d2a;
@@ -255,7 +275,6 @@ h1 {
 #contact a:hover {
     text-decoration: underline;
 }
-
 
 /* Media query for larger screens */
 @media (min-width: 768px) {
