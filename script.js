@@ -1,10 +1,24 @@
-document.querySelector('.nav-toggle').addEventListener('click', function() {
-    const navMenu = document.querySelector('.nav-menu');
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-menu');
+const navLinks = document.querySelectorAll('.nav-menu a');
+
+// 1. Functionality to open/close menu when the hamburger button is clicked
+navToggle.addEventListener('click', function() {
+    // Check the current inline display style
     if (navMenu.style.display === 'flex') {
         navMenu.style.display = 'none';
     } else {
+        // Set display to 'flex' to show it (matches your mobile CSS intention)
         navMenu.style.display = 'flex';
     }
+});
+
+// 2. Functionality to close the menu when a link is clicked
+navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        // Set display to 'none' to hide the menu
+        navMenu.style.display = 'none';
+    });
 });
 
 let currentTestimonial = 0;
@@ -52,4 +66,3 @@ window.addEventListener('scroll', function() {
         }
     });
 });
-
