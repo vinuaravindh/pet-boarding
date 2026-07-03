@@ -341,11 +341,22 @@ img {
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    padding-left: 30px;
-    border-left: 3px solid var(--color-gold-light);
+}
+
+.steps::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 16px;
+    bottom: 16px;
+    width: 3px;
+    background-color: var(--color-gold-light);
 }
 
 .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
@@ -363,9 +374,8 @@ img {
 }
 
 .step-number {
-    position: absolute;
-    left: -46px;
-    top: 0;
+    position: relative;
+    flex-shrink: 0;
     width: 32px;
     height: 32px;
     background-color: var(--color-brown);
@@ -376,6 +386,11 @@ img {
     justify-content: center;
     font-weight: 700;
     font-family: "Caprasimo", serif;
+}
+
+.step-body {
+    flex: 1;
+    min-width: 0;
 }
 
 .step h2 {
