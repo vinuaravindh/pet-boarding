@@ -53,6 +53,7 @@ let autoplayTimer = null;
 
 testimonials.forEach((_, index) => {
     const dot = document.createElement('button');
+    dot.className = 'dot';
     dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
     dot.addEventListener('click', () => showTestimonial(index));
     dotsContainer.appendChild(dot);
@@ -120,6 +121,111 @@ carousel.addEventListener('touchend', (event) => {
     }
     startAutoplay();
 }, { passive: true });
+
+/* ---------- Gallery carousel ---------- */
+const galleryCarousel = document.querySelector('.gallery-carousel');
+const galleryTrack = document.getElementById('gallery-track');
+const galleryPages = document.querySelectorAll('.gallery-page');
+const totalGalleryPages = galleryPages.length;
+const galleryDotsContainer = document.getElementById('gallery-dots');
+
+// Clone the first/last page onto each end so next/prev can keep sliding in
+// the same direction across the loop boundary instead of snapping backward.
+const firstPageClone = galleryPages[0].cloneNode(true);
+const lastPageClone = galleryPages[totalGalleryPages - 1].cloneNode(true);
+firstPageClone.setAttribute('aria-hidden', 'true');
+lastPageClone.setAttribute('aria-hidden', 'true');
+galleryTrack.appendChild(firstPageClone);
+galleryTrack.insertBefore(lastPageClone, galleryTrack.firstChild);
+
+// Slide position 0 is the leading (last-page) clone; real pages occupy 1..totalGalleryPages.
+let gallerySlide = 1;
+let currentGalleryPage = 0;
+
+galleryPages.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot';
+    dot.setAttribute('aria-label', `Go to photo set ${index + 1}`);
+    dot.addEventListener('click', () => goToGalleryPage(index));
+    galleryDotsContainer.appendChild(dot);
+});
+
+const galleryDots = document.querySelectorAll('.gallery-dots button');
+
+function setGalleryTrackPosition(slide, animate = true) {
+    galleryTrack.style.transition = animate && !prefersReducedMotion ? '' : 'none';
+    galleryTrack.style.transform = `translateX(-${slide * 100}%)`;
+
+    if (!animate) {
+        // Force a reflow so the transition:none is committed before re-enabling it,
+        // otherwise the browser can animate the "silent" snap-back too.
+        galleryTrack.offsetHeight;
+        galleryTrack.style.transition = '';
+    }
+}
+
+function updateGalleryDots(page) {
+    currentGalleryPage = page;
+    galleryDots.forEach(dot => dot.classList.remove('active'));
+    galleryDots[currentGalleryPage].classList.add('active');
+}
+
+// Silently snap a clone position back to its matching real page once the slide
+// transition has had time to finish. A fixed timeout (matching the CSS transition
+// duration) is used instead of the "transitionend" event, since that event can
+// fail to fire after rapid or interrupted transitions.
+function scheduleGalleryLoopSnap() {
+    if (gallerySlide !== totalGalleryPages + 1 && gallerySlide !== 0) return;
+
+    setTimeout(() => {
+        gallerySlide = gallerySlide === 0 ? totalGalleryPages : 1;
+        setGalleryTrackPosition(gallerySlide, false);
+    }, prefersReducedMotion ? 0 : 450);
+}
+
+function goToGalleryPage(index) {
+    currentGalleryPage = (index + totalGalleryPages) % totalGalleryPages;
+    gallerySlide = currentGalleryPage + 1;
+    setGalleryTrackPosition(gallerySlide);
+    updateGalleryDots(currentGalleryPage);
+}
+
+function goToNextGallerySlide() {
+    gallerySlide += 1;
+    setGalleryTrackPosition(gallerySlide);
+    updateGalleryDots((currentGalleryPage + 1) % totalGalleryPages);
+    scheduleGalleryLoopSnap();
+}
+
+function goToPrevGallerySlide() {
+    gallerySlide -= 1;
+    setGalleryTrackPosition(gallerySlide);
+    updateGalleryDots((currentGalleryPage - 1 + totalGalleryPages) % totalGalleryPages);
+    scheduleGalleryLoopSnap();
+}
+
+setGalleryTrackPosition(gallerySlide, false);
+updateGalleryDots(0);
+
+document.querySelector('.gallery-next').addEventListener('click', goToNextGallerySlide);
+document.querySelector('.gallery-prev').addEventListener('click', goToPrevGallerySlide);
+
+let galleryTouchStartX = 0;
+
+galleryCarousel.addEventListener('touchstart', (event) => {
+    galleryTouchStartX = event.changedTouches[0].screenX;
+}, { passive: true });
+
+galleryCarousel.addEventListener('touchend', (event) => {
+    const touchEndX = event.changedTouches[0].screenX;
+    const delta = touchEndX - galleryTouchStartX;
+
+    if (Math.abs(delta) > 40) {
+        delta < 0 ? goToNextGallerySlide() : goToPrevGallerySlide();
+    }
+}, { passive: true });
+
+galleryCarousel.addEventListener('contextmenu', (event) => event.preventDefault());
 
 /* ---------- Steps scroll progress ---------- */
 const steps = document.querySelectorAll('.step');
