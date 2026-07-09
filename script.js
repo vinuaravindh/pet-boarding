@@ -53,6 +53,7 @@ let autoplayTimer = null;
 
 testimonials.forEach((_, index) => {
     const dot = document.createElement('button');
+    dot.className = 'dot';
     dot.setAttribute('aria-label', `Go to testimonial ${index + 1}`);
     dot.addEventListener('click', () => showTestimonial(index));
     dotsContainer.appendChild(dot);
@@ -143,6 +144,7 @@ let currentGalleryPage = 0;
 
 galleryPages.forEach((_, index) => {
     const dot = document.createElement('button');
+    dot.className = 'dot';
     dot.setAttribute('aria-label', `Go to photo set ${index + 1}`);
     dot.addEventListener('click', () => goToGalleryPage(index));
     galleryDotsContainer.appendChild(dot);

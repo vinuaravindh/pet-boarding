@@ -510,22 +510,6 @@ img {
     gap: 8px;
 }
 
-.gallery-dots button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: none;
-    background-color: var(--color-gold-light);
-    cursor: pointer;
-    padding: 0;
-    transition: background-color var(--transition), transform var(--transition);
-}
-
-.gallery-dots button.active {
-    background-color: var(--color-brown);
-    transform: scale(1.2);
-}
-
 .instagram-cta {
     margin-top: 30px;
     display: flex;
@@ -649,20 +633,31 @@ img {
     gap: 8px;
 }
 
-.carousel-dots button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+/* Shared pill-style indicator dot used by both the testimonial and gallery carousels */
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 100px;
     border: none;
     background-color: var(--color-gold-light);
     cursor: pointer;
     padding: 0;
-    transition: background-color var(--transition), transform var(--transition);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.25s ease, transform 0.2s ease;
 }
 
-.carousel-dots button.active {
-    background-color: var(--color-brown);
+.dot:hover {
+    background-color: var(--color-gold);
     transform: scale(1.2);
+}
+
+.dot.active {
+    width: 22px;
+    background-color: var(--color-brown);
+    transform: none;
+}
+
+.dot.active:hover {
+    background-color: var(--color-brown-dark);
 }
 
 /* ---------- FAQ ---------- */
